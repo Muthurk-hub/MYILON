@@ -7,7 +7,7 @@ import Footer from '@/components/Footer';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'Mayilon Consultancy Services - Software Development & Technology Solutions',
+  title: 'Myilon Consultancy Services - Software Development & Technology Solutions',
   description: 'Leading software consultancy providing innovative solutions for businesses. Custom software development, digital transformation, and technology consulting services.',
 };
 

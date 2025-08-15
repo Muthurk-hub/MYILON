@@ -13,8 +13,8 @@ export default function Footer() {
                 <Code2 className="h-6 w-6 text-white" />
               </div>
               <div>
-                <span className="text-xl font-bold">Mayilon</span>
-                <span className="text-sm text-gray-400 block leading-none">Consultancy Services Pvt Ltd</span>
+                <span className="text-xl font-bold">Myilon Consultancy Services  Pvt Ltd</span>
+                
               </div>
             </div>
             <p className="text-gray-400 mb-4 max-w-md">
@@ -59,7 +59,7 @@ export default function Footer() {
             <ul className="space-y-3">
               <li className="flex items-center space-x-2">
                 <Mail className="h-4 w-4 text-blue-400" />
-                <span className="text-gray-400 text-sm">info@mayilon.com</span>
+                <span className="text-gray-400 text-sm">info@myilon.com</span>
               </li>
               <li className="flex items-center space-x-2">
                 <Phone className="h-4 w-4 text-blue-400" />
@@ -68,8 +68,8 @@ export default function Footer() {
               <li className="flex items-start space-x-2">
                 <MapPin className="h-4 w-4 text-blue-400 mt-0.5" />
                 <span className="text-gray-400 text-sm">
-                  Technology Park,<br />
-                  Bangalore, India
+                  1st floor,PSM complex<br />
+                  Tamilnadu, India
                 </span>
               </li>
             </ul>
@@ -78,7 +78,7 @@ export default function Footer() {
 
         <div className="border-t border-gray-800 mt-8 pt-8 text-center">
           <p className="text-gray-400 text-sm">
-            © 2025 Mayilon Consultancy Services Private Ltd. All rights reserved.
+            © 2025 Myilon Consultancy Services Private Ltd. All rights reserved.
           </p>
         </div>
       </div>

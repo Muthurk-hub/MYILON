@@ -26,20 +26,45 @@ export default function Contact() {
     subject: '',
     message: ''
   });
+  const [status, setStatus] = useState('');
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setStatus('Sending...');
     setIsSubmitting(true);
+    alert("first")
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
+alert("scond")
+    const data = await res.json();
+    alert("third")
     
-    // Simulate form submission
-    setTimeout(() => {
+      if (data.success) {
+        alert("final")
+        setStatus('Message sent!');
+        setIsSubmitted(true);
+        setFormData({ name: '', email: '', company: '', subject: '', message: '' });
+      } else {
+        alert("failure")
+        setStatus(`Error: ${data.message}`);
+        console.error('API Error:', data);
+      }
+    } catch (error) {
+      alert("catch error")
+      const errorMessage = error instanceof Error ? error.message : 'Unknown error occurred';
+      setStatus(`Error: ${errorMessage}`);
+      console.error('Fetch Error:', error);
+    } finally {
       setIsSubmitting(false);
-      setIsSubmitted(true);
-      setFormData({ name: '', email: '', company: '', subject: '', message: '' });
-    }, 1000);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -53,8 +78,8 @@ export default function Contact() {
     {
       icon: <Mail className="h-6 w-6 text-blue-600" />,
       title: 'Email Us',
-      details: 'info@mayilon.com',
-      subDetails: 'support@mayilon.com'
+      details: 'info@myilon.com',
+      subDetails: 'support@myilon.com'
     },
     {
       icon: <Phone className="h-6 w-6 text-blue-600" />,

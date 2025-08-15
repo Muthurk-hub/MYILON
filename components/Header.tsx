@@ -26,7 +26,7 @@ export default function Header() {
               <Code2 className="h-6 w-6 text-white" />
             </div>
             <div>
-              <span className="text-xl font-bold text-gray-900">Mayilon</span>
+              <span className="text-xl font-bold text-gray-900">Myilon</span>
               <span className="text-sm text-gray-600 block leading-none">Consultancy Services</span>
             </div>
           </Link>
