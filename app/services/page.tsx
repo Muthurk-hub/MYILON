@@ -14,97 +14,172 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import Link from 'next/link';
 
-export default function Services() {
-  const services = [
-    {
-      icon: <Code className="h-12 w-12 text-blue-600" />,
-      title: 'Custom Software Development',
-      description: 'Build tailored software solutions that perfectly fit your business needs and workflows.',
-      features: [
-        'Desktop Applications',
-        'Enterprise Software',
-        'Legacy System Modernization',
-        'API Development & Integration'
-      ]
+type ServiceCategory = 'software' | 'accounts' | 'painting';
+
+type ServiceItem = {
+  icon: JSX.Element;
+  title: string;
+  description: string;
+  features: string[];
+};
+
+type CategoryConfig = {
+  heading: string;
+  description: string;
+  services: ServiceItem[];
+};
+
+export default async function Services({
+  searchParams,
+}: {
+  searchParams?: Promise<{ category?: string }>;
+}) {
+  const resolvedSearchParams = searchParams ? await searchParams : undefined;
+  const categoryConfig: Record<ServiceCategory, CategoryConfig> = {
+    software: {
+      heading: 'Software Services',
+      description:
+        'End-to-end software services to build, modernize, and scale digital products for your business.',
+      services: [
+        {
+          icon: <Code className="h-12 w-12 text-blue-600" />,
+          title: 'Custom Software Development',
+          description:
+            'Build tailored software solutions that match your unique business workflows.',
+          features: [
+            'Desktop Applications',
+            'Enterprise Software',
+            'Legacy System Modernization',
+            'API Development & Integration',
+          ],
+        },
+        {
+          icon: <Globe className="h-12 w-12 text-blue-600" />,
+          title: 'Web Application Development',
+          description:
+            'Create responsive websites and web apps designed for performance and growth.',
+          features: [
+            'React & Next.js Applications',
+            'E-commerce Solutions',
+            'Content Management Systems',
+            'Progressive Web Apps',
+          ],
+        },
+        {
+          icon: <Smartphone className="h-12 w-12 text-blue-600" />,
+          title: 'Mobile App Development',
+          description:
+            'Develop high-quality native and cross-platform mobile apps for iOS and Android.',
+          features: [
+            'Native iOS & Android Apps',
+            'React Native Solutions',
+            'Flutter Development',
+            'Mobile App UI/UX Design',
+          ],
+        },
+      ],
     },
-    {
-      icon: <Globe className="h-12 w-12 text-blue-600" />,
-      title: 'Web Development',
-      description: 'Create stunning, responsive websites and web applications that engage your audience.',
-      features: [
-        'React & Next.js Applications',
-        'E-commerce Solutions',
-        'Content Management Systems',
-        'Progressive Web Apps'
-      ]
+    accounts: {
+      heading: 'Accounts Services',
+      description:
+        'Reliable accounting and finance support to keep your operations compliant and decision-ready.',
+      services: [
+        {
+          icon: <Database className="h-12 w-12 text-blue-600" />,
+          title: 'Bookkeeping & Ledger Management',
+          description:
+            'Maintain clean and accurate financial records with structured bookkeeping workflows.',
+          features: [
+            'Daily Transaction Recording',
+            'Ledger Reconciliation',
+            'Month-end Closing',
+            'Financial Record Organization',
+          ],
+        },
+        {
+          icon: <BarChart3 className="h-12 w-12 text-blue-600" />,
+          title: 'Financial Reporting',
+          description:
+            'Generate clear reports that help you track business health and improve planning.',
+          features: [
+            'Profit & Loss Statements',
+            'Balance Sheet Reports',
+            'Cash Flow Analysis',
+            'Management Reporting',
+          ],
+        },
+        {
+          icon: <Shield className="h-12 w-12 text-blue-600" />,
+          title: 'Tax & Compliance Support',
+          description:
+            'Stay compliant with timely filings and process checks across your accounts function.',
+          features: [
+            'Tax Preparation Support',
+            'Compliance Documentation',
+            'Audit Assistance',
+            'Regulatory Checklist Management',
+          ],
+        },
+      ],
     },
-    {
-      icon: <Smartphone className="h-12 w-12 text-blue-600" />,
-      title: 'Mobile App Development',
-      description: 'Develop native and cross-platform mobile apps for iOS and Android platforms.',
-      features: [
-        'Native iOS & Android Apps',
-        'React Native Solutions',
-        'Flutter Development',
-        'Mobile App UI/UX Design'
-      ]
+    painting: {
+      heading: 'Painting Services',
+      description:
+        'Professional painting services for homes and offices with a focus on finish, durability, and style.',
+      services: [
+        {
+          icon: <Cloud className="h-12 w-12 text-blue-600" />,
+          title: 'Interior Painting',
+          description:
+            'Refresh and transform indoor spaces with smooth finishes and color guidance.',
+          features: [
+            'Wall & Ceiling Painting',
+            'Color Consultation',
+            'Surface Preparation',
+            'Protective Coating',
+          ],
+        },
+        {
+          icon: <Cog className="h-12 w-12 text-blue-600" />,
+          title: 'Exterior Painting',
+          description:
+            'Durable exterior painting solutions designed to withstand weather and wear.',
+          features: [
+            'Weather-resistant Paints',
+            'Facade Restoration',
+            'Primer & Sealing',
+            'Long-lasting Finish',
+          ],
+        },
+        {
+          icon: <CheckCircle className="h-12 w-12 text-blue-600" />,
+          title: 'Commercial Painting',
+          description:
+            'Efficient painting services for offices, stores, and commercial buildings.',
+          features: [
+            'Office & Retail Painting',
+            'Minimal Downtime Execution',
+            'Large-area Coverage',
+            'Quality Inspection & Cleanup',
+          ],
+        },
+      ],
     },
-    {
-      icon: <Cloud className="h-12 w-12 text-blue-600" />,
-      title: 'Cloud Solutions',
-      description: 'Migrate to the cloud and leverage scalable, secure cloud infrastructure.',
-      features: [
-        'AWS & Azure Migration',
-        'Cloud Architecture Design',
-        'DevOps & CI/CD',
-        'Serverless Solutions'
-      ]
-    },
-    {
-      icon: <Database className="h-12 w-12 text-blue-600" />,
-      title: 'Data Analytics',
-      description: 'Transform your data into actionable insights with advanced analytics solutions.',
-      features: [
-        'Business Intelligence',
-        'Data Warehousing',
-        'Machine Learning Models',
-        'Real-time Analytics'
-      ]
-    },
-    {
-      icon: <Shield className="h-12 w-12 text-blue-600" />,
-      title: 'Cybersecurity',
-      description: 'Protect your digital assets with comprehensive security solutions and audits.',
-      features: [
-        'Security Audits',
-        'Penetration Testing',
-        'Compliance Management',
-        'Security Training'
-      ]
-    },
-    {
-      icon: <BarChart3 className="h-12 w-12 text-blue-600" />,
-      title: 'Digital Transformation',
-      description: 'Modernize your business processes with digital solutions and automation.',
-      features: [
-        'Process Automation',
-        'Digital Strategy',
-        'Change Management',
-        'Technology Roadmaps'
-      ]
-    },
-    {
-      icon: <Cog className="h-12 w-12 text-blue-600" />,
-      title: 'IT Consulting',
-      description: 'Get expert advice on technology decisions and strategic IT planning.',
-      features: [
-        'Technology Assessment',
-        'Architecture Planning',
-        'Vendor Selection',
-        'IT Strategy Development'
-      ]
-    }
-  ];
+  };
+
+  const selectedCategory = (resolvedSearchParams?.category || '').toLowerCase();
+  const isValidCategory = ['software', 'accounts', 'painting'].includes(selectedCategory);
+  const activeCategory = isValidCategory ? (selectedCategory as ServiceCategory) : null;
+
+  const activeCategoryConfig = activeCategory ? categoryConfig[activeCategory] : null;
+
+  const services = activeCategoryConfig
+    ? activeCategoryConfig.services
+    : [
+        ...categoryConfig.software.services,
+        ...categoryConfig.accounts.services,
+        ...categoryConfig.painting.services,
+      ];
 
   const process = [
     {
@@ -136,12 +211,45 @@ export default function Services() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-              Our Services
+              {activeCategoryConfig ? activeCategoryConfig.heading : 'Our Services'}
             </h1>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              We offer comprehensive software development and technology consulting services 
-              to help your business succeed in the digital world.
+              {activeCategoryConfig
+                ? activeCategoryConfig.description
+                : 'Explore software, accounts, and painting services tailored to your business and personal needs.'}
             </p>
+            <div className="mt-8 flex flex-wrap justify-center gap-3">
+              <Link
+                href="/services?category=software"
+                className={`rounded-full px-4 py-2 text-sm font-medium transition-colors ${
+                  activeCategory === 'software'
+                    ? 'bg-blue-700 text-white'
+                    : 'bg-white text-gray-700 hover:bg-blue-50'
+                }`}
+              >
+                Software
+              </Link>
+              <Link
+                href="/services?category=accounts"
+                className={`rounded-full px-4 py-2 text-sm font-medium transition-colors ${
+                  activeCategory === 'accounts'
+                    ? 'bg-blue-700 text-white'
+                    : 'bg-white text-gray-700 hover:bg-blue-50'
+                }`}
+              >
+                Accounts
+              </Link>
+              <Link
+                href="/services?category=painting"
+                className={`rounded-full px-4 py-2 text-sm font-medium transition-colors ${
+                  activeCategory === 'painting'
+                    ? 'bg-blue-700 text-white'
+                    : 'bg-white text-gray-700 hover:bg-blue-50'
+                }`}
+              >
+                Painting
+              </Link>
+            </div>
           </div>
         </div>
       </section>
