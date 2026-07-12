@@ -3,10 +3,9 @@ import {
   Smartphone, 
   Globe, 
   Database, 
-  Cloud, 
   Shield, 
   BarChart3, 
-  Cog,
+  Paintbrush,
   ArrowRight,
   CheckCircle
 } from 'lucide-react';
@@ -21,6 +20,8 @@ type ServiceItem = {
   title: string;
   description: string;
   features: string[];
+  imageSrc?: string;
+  imageOnly?: boolean;
 };
 
 type CategoryConfig = {
@@ -82,88 +83,17 @@ export default async function Services({
     accounts: {
       heading: 'Accounts Services',
       description:
-        'Reliable accounting and finance support to keep your operations compliant and decision-ready.',
-      services: [
-        {
-          icon: <Database className="h-12 w-12 text-blue-600" />,
-          title: 'Bookkeeping & Ledger Management',
-          description:
-            'Maintain clean and accurate financial records with structured bookkeeping workflows.',
-          features: [
-            'Daily Transaction Recording',
-            'Ledger Reconciliation',
-            'Month-end Closing',
-            'Financial Record Organization',
-          ],
+        'Coming Soon',
+        services: [],
+      
         },
-        {
-          icon: <BarChart3 className="h-12 w-12 text-blue-600" />,
-          title: 'Financial Reporting',
-          description:
-            'Generate clear reports that help you track business health and improve planning.',
-          features: [
-            'Profit & Loss Statements',
-            'Balance Sheet Reports',
-            'Cash Flow Analysis',
-            'Management Reporting',
-          ],
-        },
-        {
-          icon: <Shield className="h-12 w-12 text-blue-600" />,
-          title: 'Tax & Compliance Support',
-          description:
-            'Stay compliant with timely filings and process checks across your accounts function.',
-          features: [
-            'Tax Preparation Support',
-            'Compliance Documentation',
-            'Audit Assistance',
-            'Regulatory Checklist Management',
-          ],
-        },
-      ],
-    },
     painting: {
       heading: 'Painting Services',
       description:
-        'Professional painting services for homes and offices with a focus on finish, durability, and style.',
+        'Coming Soon',
       services: [
-        {
-          icon: <Cloud className="h-12 w-12 text-blue-600" />,
-          title: 'Interior Painting',
-          description:
-            'Refresh and transform indoor spaces with smooth finishes and color guidance.',
-          features: [
-            'Wall & Ceiling Painting',
-            'Color Consultation',
-            'Surface Preparation',
-            'Protective Coating',
-          ],
-        },
-        {
-          icon: <Cog className="h-12 w-12 text-blue-600" />,
-          title: 'Exterior Painting',
-          description:
-            'Durable exterior painting solutions designed to withstand weather and wear.',
-          features: [
-            'Weather-resistant Paints',
-            'Facade Restoration',
-            'Primer & Sealing',
-            'Long-lasting Finish',
-          ],
-        },
-        {
-          icon: <CheckCircle className="h-12 w-12 text-blue-600" />,
-          title: 'Commercial Painting',
-          description:
-            'Efficient painting services for offices, stores, and commercial buildings.',
-          features: [
-            'Office & Retail Painting',
-            'Minimal Downtime Execution',
-            'Large-area Coverage',
-            'Quality Inspection & Cleanup',
-          ],
-        },
-      ],
+       
+    ],
     },
   };
 
@@ -260,22 +190,28 @@ export default async function Services({
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {services.map((service, index) => (
               <Card key={index} className="border-0 shadow-lg hover:shadow-xl transition-shadow duration-300 h-full">
-                <CardHeader>
-                  <div className="mb-4">{service.icon}</div>
-                  <CardTitle className="text-xl text-gray-900">
-                    {service.title}
-                  </CardTitle>
-                </CardHeader>
+                {!service.imageOnly && (
+                  <CardHeader>
+                    <div className="mb-4">{service.icon}</div>
+                    <CardTitle className="text-xl text-gray-900">
+                      {service.title}
+                    </CardTitle>
+                  </CardHeader>
+                )}
                 <CardContent>
-                  <p className="text-gray-600 mb-6">{service.description}</p>
-                  <ul className="space-y-2">
-                    {service.features.map((feature, featureIndex) => (
-                      <li key={featureIndex} className="flex items-center space-x-2">
-                        <CheckCircle className="h-4 w-4 text-green-600 flex-shrink-0" />
-                        <span className="text-sm text-gray-700">{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
+                  {!service.imageOnly && (
+                    <>
+                      <p className="text-gray-600 mb-6">{service.description}</p>
+                      <ul className="space-y-2">
+                        {service.features.map((feature, featureIndex) => (
+                          <li key={featureIndex} className="flex items-center space-x-2">
+                            <CheckCircle className="h-4 w-4 text-green-600 flex-shrink-0" />
+                            <span className="text-sm text-gray-700">{feature}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </>
+                  )}
                 </CardContent>
               </Card>
             ))}
@@ -305,31 +241,6 @@ export default async function Services({
                   {step.title}
                 </h3>
                 <p className="text-gray-600">{step.description}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Technologies Section */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Technologies We Work With
-            </h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              We stay current with the latest technologies to deliver cutting-edge solutions.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8">
-            {[
-              'React', 'Node.js', 'Python', 'Java', 'AWS', 'Azure',
-              'MongoDB', 'PostgreSQL', 'Docker', 'Kubernetes', 'Flutter', 'React Native'
-            ].map((tech, index) => (
-              <div key={index} className="text-center p-4 bg-gray-50 rounded-lg hover:bg-blue-50 transition-colors">
-                <span className="font-medium text-gray-700">{tech}</span>
               </div>
             ))}
           </div>

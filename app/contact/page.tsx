@@ -36,30 +36,29 @@ export default function Contact() {
     e.preventDefault();
     setStatus('Sending...');
     setIsSubmitting(true);
-    alert("first")
+    
     try {
       const res = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
       });
-alert("scond")
+
     const data = await res.json();
-    alert("third")
+    
     
       if (data.success) {
-        alert("final")
-        setStatus('Message sent!');
+     setStatus('Message sent!');
         setIsSubmitted(true);
         setFormData({ name: '', email: '', company: '', subject: '', message: '' });
       } else {
-        alert("failure")
+       
         setStatus(`Error: ${data.message}`);
         console.error('API Error:', data);
       }
     } catch (error) {
-      alert("catch error")
-      const errorMessage = error instanceof Error ? error.message : 'Unknown error occurred';
+      
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error occurred';
       setStatus(`Error: ${errorMessage}`);
       console.error('Fetch Error:', error);
     } finally {
@@ -84,20 +83,20 @@ alert("scond")
     {
       icon: <Phone className="h-6 w-6 text-blue-600" />,
       title: 'Call Us',
-      details: '+91 12345 67890',
-      subDetails: '+91 98765 43210'
+      subDetails: '+91 88255 69684'
     },
     {
       icon: <MapPin className="h-6 w-6 text-blue-600" />,
       title: 'Visit Us',
-      details: 'Technology Park, Electronic City',
-      subDetails: 'Bangalore, Karnataka 560100'
+      details: '69A/1D 1st Floor,PSM complex, V.M.Chatram',
+      subDetails: 'Tirunelveli, Tamilnadu-627011'
     },
+    
     {
       icon: <Clock className="h-6 w-6 text-blue-600" />,
       title: 'Business Hours',
       details: 'Monday - Friday: 9:00 AM - 6:00 PM',
-      subDetails: 'Saturday: 9:00 AM - 1:00 PM'
+      subDetails: 'Saturday: 9:00 AM - 4:00 PM'
     }
   ];
 

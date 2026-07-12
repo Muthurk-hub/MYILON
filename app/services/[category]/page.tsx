@@ -1,8 +1,19 @@
-import { Code, Smartphone, Globe, Database, Cloud, Shield, BarChart3, Cog, ArrowRight, CheckCircle } from 'lucide-react';
+import {
+  Code,
+  Smartphone,
+  Globe,
+  Database,
+  Shield,
+  BarChart3,
+  Paintbrush,
+  ArrowRight,
+  CheckCircle,
+} from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
+import ServiceImageLightbox from '@/components/ServiceImageLightbox';
 
 type ServiceCategory = 'software' | 'accounts' | 'painting';
 
@@ -11,6 +22,8 @@ type ServiceItem = {
   title: string;
   description: string;
   features: string[];
+  imageSrc?: string;
+  imageOnly?: boolean;
 };
 
 type CategoryConfig = {
@@ -66,87 +79,17 @@ const categoryConfig: Record<ServiceCategory, CategoryConfig> = {
   accounts: {
     heading: 'Accounts Services',
     description:
-      'Reliable accounting and finance support to keep your operations compliant and decision-ready.',
-    services: [
-      {
-        icon: <Database className="h-12 w-12 text-blue-600" />,
-        title: 'Bookkeeping & Ledger Management',
-        description:
-          'Maintain clean and accurate financial records with structured bookkeeping workflows.',
-        features: [
-          'Daily Transaction Recording',
-          'Ledger Reconciliation',
-          'Month-end Closing',
-          'Financial Record Organization',
-        ],
-      },
-      {
-        icon: <BarChart3 className="h-12 w-12 text-blue-600" />,
-        title: 'Financial Reporting',
-        description:
-          'Generate clear reports that help you track business health and improve planning.',
-        features: [
-          'Profit & Loss Statements',
-          'Balance Sheet Reports',
-          'Cash Flow Analysis',
-          'Management Reporting',
-        ],
-      },
-      {
-        icon: <Shield className="h-12 w-12 text-blue-600" />,
-        title: 'Tax & Compliance Support',
-        description:
-          'Stay compliant with timely filings and process checks across your accounts function.',
-        features: [
-          'Tax Preparation Support',
-          'Compliance Documentation',
-          'Audit Assistance',
-          'Regulatory Checklist Management',
-        ],
-      },
-    ],
+      'Coming soon...',
+       services: [],
+    
+    
   },
   painting: {
     heading: 'Painting Services',
     description:
-      'Professional painting services for homes and offices with a focus on finish, durability, and style.',
+      'Coming Soon...',
     services: [
-      {
-        icon: <Cloud className="h-12 w-12 text-blue-600" />,
-        title: 'Interior Painting',
-        description:
-          'Refresh and transform indoor spaces with smooth finishes and color guidance.',
-        features: [
-          'Wall & Ceiling Painting',
-          'Color Consultation',
-          'Surface Preparation',
-          'Protective Coating',
-        ],
-      },
-      {
-        icon: <Cog className="h-12 w-12 text-blue-600" />,
-        title: 'Exterior Painting',
-        description:
-          'Durable exterior painting solutions designed to withstand weather and wear.',
-        features: [
-          'Weather-resistant Paints',
-          'Facade Restoration',
-          'Primer & Sealing',
-          'Long-lasting Finish',
-        ],
-      },
-      {
-        icon: <CheckCircle className="h-12 w-12 text-blue-600" />,
-        title: 'Commercial Painting',
-        description:
-          'Efficient painting services for offices, stores, and commercial buildings.',
-        features: [
-          'Office & Retail Painting',
-          'Minimal Downtime Execution',
-          'Large-area Coverage',
-          'Quality Inspection & Cleanup',
-        ],
-      },
+      
     ],
   },
 };
@@ -180,20 +123,27 @@ export default async function CategoryServices({
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {config.services.map((service, index) => (
               <Card key={index} className="border-0 shadow-lg hover:shadow-xl transition-shadow duration-300 h-full">
-                <CardHeader>
-                  <div className="mb-4">{service.icon}</div>
-                  <CardTitle className="text-xl text-gray-900">{service.title}</CardTitle>
-                </CardHeader>
+                {!service.imageOnly && (
+                  <CardHeader>
+                    <div className="mb-4">{service.icon}</div>
+                    <CardTitle className="text-xl text-gray-900">{service.title}</CardTitle>
+                  </CardHeader>
+                )}
                 <CardContent>
-                  <p className="text-gray-600 mb-6">{service.description}</p>
-                  <ul className="space-y-2">
-                    {service.features.map((feature, featureIndex) => (
-                      <li key={featureIndex} className="flex items-center space-x-2">
-                        <CheckCircle className="h-4 w-4 text-green-600 flex-shrink-0" />
-                        <span className="text-sm text-gray-700">{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
+                  {service.imageSrc && <ServiceImageLightbox src={service.imageSrc} alt={service.title} />}
+                  {!service.imageOnly && (
+                    <>
+                      <p className="text-gray-600 mb-6">{service.description}</p>
+                      <ul className="space-y-2">
+                        {service.features.map((feature, featureIndex) => (
+                          <li key={featureIndex} className="flex items-center space-x-2">
+                            <CheckCircle className="h-4 w-4 text-green-600 flex-shrink-0" />
+                            <span className="text-sm text-gray-700">{feature}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </>
+                  )}
                 </CardContent>
               </Card>
             ))}

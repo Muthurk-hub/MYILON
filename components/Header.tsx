@@ -2,8 +2,9 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
-import { Menu, X, Code2, ChevronDown } from 'lucide-react';
+import { Menu, X, ChevronDown } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 export default function Header() {
@@ -30,13 +31,19 @@ export default function Header() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
-          <Link href="/" className="flex items-center space-x-2">
-            <div className="bg-blue-700 p-2 rounded-lg">
-              <Code2 className="h-6 w-6 text-white" />
-            </div>
-            <div>
-              <span className="text-xl font-bold text-gray-900">Myilon</span>
-              <span className="text-sm text-gray-600 block leading-none">Consultancy Services</span>
+          <Link href="/" className="flex items-center gap-3">
+            <Image
+              src="/MYILON.png"
+              alt="Myilon Consultancy"
+              width={160}
+              height={40}
+              className="h-9 w-auto max-w-[160px] object-contain"
+              priority
+            />
+            <div className="hidden sm:block">
+              <span className="text-xl font-bold text-blue-900">
+                Myilon Consultancy Services Private Ltd
+              </span>
             </div>
           </Link>
 
